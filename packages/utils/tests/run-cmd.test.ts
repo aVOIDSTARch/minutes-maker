@@ -1,6 +1,6 @@
 // Test file for the runCmd function in the utils package
 import { expect, test, describe } from "vite-plus/test";
-import { runCmdSync, runCmdAsync, runCmdStreaming, isSuccess } from "../src/run-cmd.ts";
+import { runCmdSync, runCmdAsync, runCmdStreaming, isSuccess } from "@avoidstarch/ts-kit";
 
 // Test isSuccess function
 describe("isSuccess", () => {
@@ -160,7 +160,7 @@ describe("runCmdStreaming", () => {
     if (!result.success) return;
 
     const signal = await new Promise<string | null>((resolve) => {
-      result.data.process?.on("close", (_code, signal) => resolve(signal));
+      result.data.process?.on("close", (_code: number, signal) => resolve(signal));
     });
 
     expect(signal).toBe("SIGTERM");
